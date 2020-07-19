@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WeatherForecast.Utils"
+    x:Class="WeatherForecast.View.CityWeatherView"
+    Title=" "
+    BackgroundColor="#140736">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="currentDayTemplate">
+                <ViewCell>
+                    <Frame BackgroundColor="#301479" Margin="2,5,2,0" CornerRadius="20">
+                        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" BackgroundColor="#301479" HeightRequest="100" Margin="10,0,10,5">
+                            <FlexLayout Direction="Column" WidthRequest="300" JustifyContent="SpaceBetween" Margin="10,5,0,5">
+                                <Label Text="{Binding Date,StringFormat='{0:D}'}" TextColor="White" FontSize="25"/>
+                                <Label Text="{Binding DayTemp,StringFormat='{0}°C'}" TextColor="White" FontSize="25"/>
+                                <Label Text="{Binding WeatherDesc}" TextColor="White" FontSize="20"/>
+                            </FlexLayout>
+                            <StackLayout>
+                                <Image Source="{Binding WeatherIcon}" Aspect="AspectFit" HeightRequest="100" WidthRequest="100"/>
+                            </StackLayout>
+                        </FlexLayout>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="futureDayTemplate">
+                <ViewCell>
+                    <Frame BackgroundColor="#5129BB" Margin="2,2,2,0" CornerRadius="20">
+                        <FlexLayout BackgroundColor="#5129BB" Direction="Row" AlignItems="Center" HeightRequest="40" JustifyContent="SpaceBetween"  Margin="10,0,10,5">
+                            <Label Text="{Binding Date,StringFormat='{0:ddd},{0:dd-MMM}'}" TextColor="White" Margin="10,0,0,0"/>
+                            <Label Text="{Binding DayTemp, StringFormat='{0}°C'}" TextColor="White"/>
+                            <Label Text="{Binding WeatherDesc}" TextColor="White"/>
+                            <Image Source="{Binding WeatherIcon}"/>
+                        </FlexLayout>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+            <local:WeatherDataTemplateSelector x:Key="weatherDataTemplateSelector"
+                CurrentDayTemplate="{StaticResource currentDayTemplate}"
+                FutureDayTemplate="{StaticResource futureDayTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <StackLayout HorizontalOptions="StartAndExpand">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Label Text="{Binding City.CityName, StringFormat='{0},'}" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="35"/>
+            <Label Text="{Binding City.CountryCode}" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="35"/>
+        </StackLayout>
+        <Button Text="Change City" Command="{Binding ChangeCity}" BackgroundColor="#140736" TextColor="Pink" FontSize="16" Margin="10,0,10,0"/>
+        <local:ListView x:Name="listView"
+                  HasUnevenRows="True"
+                  BackgroundColor="#140736"
+                  SeparatorVisibility="None"
+                  ItemsSource="{Binding WeatherList}"
+                  ItemTemplate="{StaticResource weatherDataTemplateSelector}"
+                  ItemClickCommand="{Binding ItemTapped}">
+        </local:ListView>
+    </StackLayout>
+</ContentPage>
