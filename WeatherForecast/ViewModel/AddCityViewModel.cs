@@ -183,6 +183,11 @@ namespace WeatherForecast.ViewModel
                     IsLoading = true;
                     await GetPlaceMarks(location.Latitude, location.Longitude);
                     IsLoading = false;
+                    AddCityCommand.Execute(null);
+                }
+                else
+                {
+                    Address = "Unable to detect location";
                 }
             }
             catch (FeatureNotSupportedException fnsEx)
