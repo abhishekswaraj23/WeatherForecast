@@ -214,7 +214,7 @@ namespace WeatherForecast.ViewModel
 
             if (fullAddress != null)
             {
-                Address = $"City: {fullAddress.FirstOrDefault().Locality}, Country: {fullAddress.FirstOrDefault().CountryName},\n Latitude: {lat}, Longitude: {lon}";
+                Address = $"City: {fullAddress.FirstOrDefault().Locality}, Country: {fullAddress.FirstOrDefault().CountryName}\nLatitude: {lat}, Longitude: {lon}";
                 CityName = fullAddress.FirstOrDefault().Locality;
                 EnableAddCity = true;
                 Latitude = lat;

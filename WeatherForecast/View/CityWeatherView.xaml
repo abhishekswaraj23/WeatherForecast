@@ -8,7 +8,7 @@
     BackgroundColor="#140736">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
-            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="100" WidthRequest="100"/>
+            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="60" WidthRequest="60"/>
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Resources>
@@ -18,9 +18,9 @@
                     <Frame BackgroundColor="#301479" Margin="2,5,2,0" CornerRadius="20">
                         <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" BackgroundColor="#301479" HeightRequest="100" Margin="10,0,10,5">
                             <FlexLayout Direction="Column" WidthRequest="300" JustifyContent="SpaceBetween" Margin="10,5,0,5">
-                                <Label Text="{Binding Date,StringFormat='{0:D}'}" TextColor="White" FontSize="25"/>
-                                <Label Text="{Binding DayTemp,StringFormat='{0}°C'}" TextColor="White" FontSize="25"/>
-                                <Label Text="{Binding WeatherDesc}" TextColor="White" FontSize="20"/>
+                                <Label Text="{Binding Date,StringFormat='{0:D}'}" TextColor="#FFCD00" FontSize="25"/>
+                                <Label Text="{Binding DayTemp,StringFormat='{0}°C'}" TextColor="#5BC5F0" FontSize="25"/>
+                                <Label Text="{Binding WeatherDesc}" TextColor="#D95362" FontSize="15"/>
                             </FlexLayout>
                             <StackLayout>
                                 <Image Source="{Binding WeatherIcon}" Aspect="AspectFit" HeightRequest="100" WidthRequest="100"/>
@@ -32,10 +32,10 @@
             <DataTemplate x:Key="futureDayTemplate">
                 <ViewCell>
                     <Frame BackgroundColor="#5129BB" Margin="2,2,2,0" CornerRadius="20">
-                        <FlexLayout BackgroundColor="#5129BB" Direction="Row" AlignItems="Center" HeightRequest="40" JustifyContent="SpaceBetween"  Margin="10,0,10,5">
-                            <Label Text="{Binding Date,StringFormat='{0:ddd},{0:dd-MMM}'}" TextColor="White" Margin="10,0,0,0"/>
-                            <Label Text="{Binding DayTemp, StringFormat='{0}°C'}" TextColor="White"/>
-                            <Label Text="{Binding WeatherDesc}" TextColor="White"/>
+                        <FlexLayout BackgroundColor="#5129BB" Direction="Row" AlignItems="Center" HeightRequest="30" JustifyContent="SpaceBetween"  Margin="10,0,10,5">
+                            <Label Text="{Binding Date,StringFormat='{0:ddd},{0:dd-MMM}'}" TextColor="White" FontSize="16" Margin="10,0,0,0"/>
+                            <Label Text="{Binding DayTemp, StringFormat='{0}°C'}" TextColor="White" FontSize="16"/>
+                            <Label Text="{Binding WeatherDesc}" TextColor="White" FontSize="16"/>
                             <Image Source="{Binding WeatherIcon}"/>
                         </FlexLayout>
                     </Frame>
@@ -59,7 +59,7 @@
                         IsPullToRefreshEnabled="True"
                         RefreshCommand="{Binding RefreshCommand}"
                         IsRefreshing="{Binding IsLoading}"
-                        RefreshControlColor="White"
+                        RefreshControlColor="DeepPink"
                         HasUnevenRows="True"
                         BackgroundColor="#140736"
                         SeparatorVisibility="None"

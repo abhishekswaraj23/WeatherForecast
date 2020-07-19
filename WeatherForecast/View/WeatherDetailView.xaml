@@ -6,7 +6,7 @@
              Title="">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
-            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="100" WidthRequest="100"/>
+            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="60" WidthRequest="60"/>
         </StackLayout>
     </NavigationPage.TitleView>
     <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
