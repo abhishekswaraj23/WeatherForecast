@@ -19,13 +19,20 @@ namespace WeatherForecast.ViewModel
             WeatherList = new ObservableCollection<WeatherInfo>();
             if (city == null)
             {
-                Navigation.PushAsync(new AddCityView(this));
+                if (Application.Current.Properties.ContainsKey("CityInfo"))
+                {
+                    City = Utils.JSONManager.DeserializeObject<CityInfo>(Application.Current.Properties["CityInfo"].ToString());
+                }
+                else
+                {
+                    Navigation.PushAsync(new AddCityView(this));
+                }
             }
             else
             {
                 LoadWeatherData();
             }
-            
+
         }
 
         private async Task LoadWeatherData()
@@ -51,6 +58,8 @@ namespace WeatherForecast.ViewModel
             {
                 if (SetProperty(ref city, value))
                 {
+                    Application.Current.Properties["CityInfo"] = Utils.JSONManager.SerializeObject(city);
+                    Application.Current.SavePropertiesAsync();
                     LoadWeatherData();
                 }
             }
