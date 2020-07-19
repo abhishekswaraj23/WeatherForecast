@@ -5,6 +5,7 @@ using WeatherForecast.ServiceProvider;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace WeatherForecast.ViewModel
 {
@@ -106,38 +107,53 @@ namespace WeatherForecast.ViewModel
             }
         }
 
+        bool isLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return isLoading;
+            }
+            set
+            {
+                SetProperty(ref isLoading, value);
+            }
+        }
 
         public ICommand PerformSearch => new Command(async () =>
         {
-            if (CityName != null)
+            Address = "";
+            if (!string.IsNullOrEmpty(CityName))
             {
                 try
                 {
+                    IsLoading = true;
                     var locations = await Geocoding.GetLocationsAsync(CityName);
+                    IsLoading = false;
                     var location = locations?.FirstOrDefault();
                     if (location != null)
                     {
                         Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                        var fullAddress = await Geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude);
-
-                        if (fullAddress != null)
-                        {
-
-                            Address = $"City: {fullAddress.FirstOrDefault().Locality}, Country: {fullAddress.FirstOrDefault().CountryName},\n Latitude: {location.Latitude}, Longitude: {location.Longitude}";
-                            EnableAddCity = true;
-                            Latitude = location.Latitude;
-                            Longitude = location.Longitude;
-                            Country = fullAddress.FirstOrDefault().CountryName;
-                            CountryCode = fullAddress.FirstOrDefault().CountryCode;
-                        }
+                        IsLoading = true;
+                        await GetPlaceMarks(location.Latitude, location.Longitude);
+                        IsLoading = false;
+                    }
+                    else
+                    {
+                        Address = "Invalid Address";
                     }
                 }
                 catch (Exception ex)
                 {
                     Address = "Invalid Address";
                     EnableAddCity = false;
+                    IsLoading = false;
                 }
 
+            }
+            else
+            {
+                Address = "Invalid Address";
             }
         });
 
@@ -154,5 +170,58 @@ namespace WeatherForecast.ViewModel
             Navigation.PopAsync();
         });
 
+        public ICommand CurrentLocation => new Command(async () =>
+        {
+            try
+            {
+                Address = "";
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    IsLoading = true;
+                    await GetPlaceMarks(location.Latitude, location.Longitude);
+                    IsLoading = false;
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        });
+
+
+        async Task GetPlaceMarks(double lat,double lon)
+        {
+            var fullAddress = await Geocoding.GetPlacemarksAsync(lat, lon);
+
+            if (fullAddress != null)
+            {
+                Address = $"City: {fullAddress.FirstOrDefault().Locality}, Country: {fullAddress.FirstOrDefault().CountryName},\n Latitude: {lat}, Longitude: {lon}";
+                CityName = fullAddress.FirstOrDefault().Locality;
+                EnableAddCity = true;
+                Latitude = lat;
+                Longitude = lon;
+                Country = fullAddress.FirstOrDefault().CountryName;
+                CountryCode = fullAddress.FirstOrDefault().CountryCode;
+            }
+        }
     }
 }

@@ -4,11 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="WeatherForecast.View.AddCityView"
     BackgroundColor="#140736"
-    Title="Add City"
-    >
+    Title="Add City">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="100" WidthRequest="100"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <StackLayout Margin="10,10,10,0">
         <Entry Placeholder="Enter City Name" HeightRequest="40" Text="{Binding CityName}" BackgroundColor="White"/>
         <Button Text="Find City" Command="{Binding PerformSearch}" BackgroundColor="#29BB85" Margin="0,10,0,0" TextColor="White" FontSize="20"/>
+        <Button Text="Use Current Location" Command="{Binding CurrentLocation}" BackgroundColor="#29BB85" Margin="0,10,0,0" TextColor="White" FontSize="20"/>
+        <ActivityIndicator Color="White" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
         <Label Text="{Binding Address}" TextColor="White" HorizontalOptions="FillAndExpand" FontSize="Body" Margin="0,40,0,40"/>
         <Button Text="Add City" IsVisible="{Binding EnableAddCity}" Command="{Binding AddCityCommand}" BackgroundColor="#29BB85" TextColor="White" FontSize="20" Margin="0,10,0,0"/>
     </StackLayout>

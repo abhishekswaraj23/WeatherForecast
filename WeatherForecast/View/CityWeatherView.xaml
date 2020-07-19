@@ -6,6 +6,11 @@
     x:Class="WeatherForecast.View.CityWeatherView"
     Title=" "
     BackgroundColor="#140736">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="100" WidthRequest="100"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="currentDayTemplate">
@@ -45,17 +50,22 @@
 
     <StackLayout HorizontalOptions="StartAndExpand">
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <Label Text="{Binding City.CityName, StringFormat='{0},'}" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="35"/>
-            <Label Text="{Binding City.CountryCode}" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="35"/>
+            <Label Text="{Binding City.CityName, StringFormat='{0},'}" HorizontalOptions="CenterAndExpand" TextColor="#FFCD00" FontSize="35"/>
+            <Label Text="{Binding City.CountryCode}" HorizontalOptions="CenterAndExpand" TextColor="#FFCD00" FontSize="35"/>
         </StackLayout>
-        <Button Text="Change City" Command="{Binding ChangeCity}" BackgroundColor="#140736" TextColor="Pink" FontSize="16" Margin="10,0,10,0"/>
+        <Button Text="Change City" Command="{Binding ChangeCity}" BackgroundColor="#140736" TextColor="#DA4394" FontSize="16" Margin="10,0,10,0"/>
+        <!--<ActivityIndicator Color="White" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>-->
         <local:ListView x:Name="listView"
-                  HasUnevenRows="True"
-                  BackgroundColor="#140736"
-                  SeparatorVisibility="None"
-                  ItemsSource="{Binding WeatherList}"
-                  ItemTemplate="{StaticResource weatherDataTemplateSelector}"
-                  ItemClickCommand="{Binding ItemTapped}">
+                        IsPullToRefreshEnabled="True"
+                        RefreshCommand="{Binding RefreshCommand}"
+                        IsRefreshing="{Binding IsLoading}"
+                        RefreshControlColor="White"
+                        HasUnevenRows="True"
+                        BackgroundColor="#140736"
+                        SeparatorVisibility="None"
+                        ItemsSource="{Binding WeatherList}"
+                        ItemTemplate="{StaticResource weatherDataTemplateSelector}"
+                        ItemClickCommand="{Binding ItemTapped}">
         </local:ListView>
     </StackLayout>
 </ContentPage>

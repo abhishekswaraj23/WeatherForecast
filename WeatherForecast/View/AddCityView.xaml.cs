@@ -11,8 +11,6 @@ namespace WeatherForecast.View
         {
             InitializeComponent();
             BindingContext = new AddCityViewModel(Navigation, prevPage);
-        }
-
-        
+        }  
     }
 }

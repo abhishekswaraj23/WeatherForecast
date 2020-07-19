@@ -16,19 +16,24 @@ namespace WeatherForecast.ViewModel
         public CityWeatherViewModel(INavigation navigation)
         {
             Navigation = navigation;
-
-            City = new CityInfo() { CityName = "Patna", Country = "India", CountryCode = "IN", Latitude = 25.5941, Longitude = 85.158875 };
             WeatherList = new ObservableCollection<WeatherInfo>();
-            LoadWeatherData();
-
-
+            if (city == null)
+            {
+                Navigation.PushAsync(new AddCityView(this));
+            }
+            else
+            {
+                LoadWeatherData();
+            }
+            
         }
 
         private async Task LoadWeatherData()
         {
             WeatherList.Clear();
+            IsLoading = true;
             var list = await new WeatherForecastService().GetWeatherInfo(City.Longitude, City.Latitude);
-
+            IsLoading = false;
             foreach (var item in list)
             {
                 WeatherList.Add(item);
@@ -50,6 +55,19 @@ namespace WeatherForecast.ViewModel
                 }
             }
         }
+
+        bool isLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return isLoading;
+            }
+            set
+            {
+                SetProperty(ref isLoading, value);
+            }
+        }
         public ObservableCollection<WeatherInfo> WeatherList { get; set; }
 
         public ICommand ChangeCity => new Command(() =>
@@ -61,6 +79,11 @@ namespace WeatherForecast.ViewModel
         {
             var data = (Model.WeatherInfo)(e);
             Navigation.PushAsync(new WeatherDetailView(data, $"{this.City.CityName}, {this.City.CountryCode}"));
+        });
+
+        public ICommand RefreshCommand => new Command(async () =>
+        {
+            await LoadWeatherData();
         });
 
     }

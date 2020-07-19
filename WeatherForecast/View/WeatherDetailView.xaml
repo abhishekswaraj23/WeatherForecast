@@ -4,29 +4,34 @@
              x:Class="WeatherForecast.View.WeatherDetailView"
              BackgroundColor="#140736"
              Title="">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+            <Image Source="http://openweathermap.org/img/wn/03d@2x.png" HeightRequest="100" WidthRequest="100"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
 
-        <Label Text="{Binding City}" HorizontalOptions="StartAndExpand" TextColor="White" FontSize="35" Margin="20,0,0,0"/>
-        <Label Text="{Binding WeatherInfo.Date,StringFormat='{0:D}'}" HorizontalOptions="StartAndExpand" Margin="20,0,0,0" TextColor="White" FontSize="20"/>
+        <Label Text="{Binding City}" HorizontalOptions="CenterAndExpand" TextColor="#FFCD00" FontSize="35" Margin="20,0,0,0"/>
+        <Label Text="{Binding WeatherInfo.Date,StringFormat='{0:D}'}" HorizontalOptions="CenterAndExpand" Margin="20,0,0,0" TextColor="White" FontSize="20"/>
         <FlexLayout Direction="Row" JustifyContent="Start" AlignItems="Center" Margin="10,-30,0,0">
             <Image Source="{Binding WeatherInfo.WeatherIcon}" Aspect="Fill" HeightRequest="200" WidthRequest="200"/>
-            <Label Text="{Binding WeatherInfo.WeatherDesc}" Margin="-10,-10,10,0" TextColor="White"/>
+            <Label Text="{Binding WeatherInfo.WeatherDesc}" Margin="-10,-10,10,0" TextColor="#D95362"/>
         </FlexLayout>
         <FlexLayout Direction="Row" AlignItems="Center" Margin="20,-40,0,10">
-            <Label Text="{Binding WeatherInfo.DayTemp,StringFormat='{0}°'}" FontSize="60" TextColor="White"/>
-            <Label Text="{Binding WeatherInfo.MaxTemp,StringFormat='Max:{0}° , '}" TextColor="White" Margin="10,10,0,0"/>
-            <Label Text="{Binding WeatherInfo.MinTemp,StringFormat='Min:{0}°'}"  TextColor="White" Margin="10,10,10,0"/>
+            <Label Text="{Binding WeatherInfo.DayTemp,StringFormat='{0}°'}" FontSize="60" TextColor="#5BC5F0"/>
+            <Label Text="{Binding WeatherInfo.MaxTemp,StringFormat='Max:{0}° , '}" TextColor="#D95362" Margin="10,10,0,0"/>
+            <Label Text="{Binding WeatherInfo.MinTemp,StringFormat='Min:{0}°'}"  TextColor="#D95362" Margin="10,10,10,0"/>
         </FlexLayout>
         <ScrollView>
             <Frame BackgroundColor="#301479" Padding="10,0,10,0" Margin="5,0,5,0">
                 <StackLayout>
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" HeightRequest="90" Margin="0,10,0,0">
                         <FlexLayout Direction="Column" Margin="10,0,0,0" WidthRequest="150">
-                            <Label Text="Sunrise " TextColor="White" Margin="10,10,0,0" FontSize="14"/>
+                            <Label Text="Sunrise " TextColor="#36FFB1" Margin="10,10,0,0" FontSize="14"/>
                             <Label Text="{Binding WeatherInfo.SunriseTime,StringFormat='{0:hh:mm tt}'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                         <FlexLayout Direction="Column" Margin="0,0,0,0" WidthRequest="200">
-                            <Label Text="Sunset " TextColor="White" Margin="10,10,0,0" FontSize="14"/>
+                            <Label Text="Sunset " TextColor="#36FFB1" Margin="10,10,0,0" FontSize="14"/>
                             <Label Text="{Binding WeatherInfo.SunsetTime,StringFormat='{0:hh:mm tt}'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                     </FlexLayout>
@@ -34,33 +39,33 @@
 
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" HeightRequest="100" Margin="0,0,0,0">
                         <FlexLayout Direction="Column" Margin="10,0,0,0" WidthRequest="200">
-                            <Label Text="Pressure" TextColor="White" Margin="10,10,0,0" FontSize="14"/>
+                            <Label Text="Pressure" TextColor="#36FFB1" Margin="10,10,0,0" FontSize="14"/>
                             <Label Text="{Binding WeatherInfo.Pressure,StringFormat='{0} hPa'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                         <FlexLayout Direction="Column" Margin="0,0,0,0" WidthRequest="200">
-                            <Label Text="Humidity" TextColor="White" Margin="10,10,0,0" FontSize="14"/>
+                            <Label Text="Humidity" TextColor="#36FFB1" Margin="10,10,0,0" FontSize="14"/>
                             <Label Text="{Binding WeatherInfo.Humidity,StringFormat='{0}%'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                     </FlexLayout>
                     <BoxView BackgroundColor="White" HeightRequest=".5"/>
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" HeightRequest="100" Margin="0,0,0,0">
                         <FlexLayout Direction="Column" Margin="10,0,0,0" WidthRequest="200">
-                            <Label Text="Perceived temparature" TextColor="White" FontSize="14" Margin="10,10,0,0"/>
+                            <Label Text="Perceived temparature" TextColor="#36FFB1" FontSize="14" Margin="10,10,0,0"/>
                             <Label Text="{Binding WeatherInfo.FeelsLikeDay,StringFormat='{0}°'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                         <FlexLayout Direction="Column" Margin="0,0,0,0" WidthRequest="200">
-                            <Label Text="Wind speed" TextColor="White" FontSize="14" Margin="10,10,0,0"/>
+                            <Label Text="Wind speed" TextColor="#36FFB1" FontSize="14" Margin="10,10,0,0"/>
                             <Label Text="{Binding WeatherInfo.WindSpeed,StringFormat='{0} km/hr'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                     </FlexLayout>
                     <BoxView BackgroundColor="White" HeightRequest=".5"/>
                     <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" HeightRequest="100" Margin="0,0,0,0">
                         <FlexLayout Direction="Column" Margin="10,0,0,0" WidthRequest="200">
-                            <Label Text="UV index" TextColor="White" FontSize="14" Margin="10,10,0,0"/>
+                            <Label Text="UV index" TextColor="#36FFB1" FontSize="14" Margin="10,10,0,0"/>
                             <Label Text="{Binding WeatherInfo.UVI}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                         <FlexLayout Direction="Column" Margin="0,0,0,0" WidthRequest="200">
-                            <Label Text="Rain precipitation" TextColor="White" FontSize="14" Margin="10,10,0,0"/>
+                            <Label Text="Rain precipitation" TextColor="#36FFB1" FontSize="14" Margin="10,10,0,0"/>
                             <Label Text="{Binding WeatherInfo.Rain,StringFormat='{0} mm'}" FontSize="25" TextColor="White" Margin="10,10,0,0"/>
                         </FlexLayout>
                     </FlexLayout>

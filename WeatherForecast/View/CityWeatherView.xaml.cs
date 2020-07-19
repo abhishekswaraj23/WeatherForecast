@@ -7,10 +7,13 @@ namespace WeatherForecast.View
 {
     public partial class CityWeatherView : ContentPage
     {
+        CityWeatherViewModel cityWeatherViewModel;
         public CityWeatherView()
         {
             InitializeComponent();
-            BindingContext = new CityWeatherViewModel(Navigation);
+            cityWeatherViewModel = new CityWeatherViewModel(Navigation);
+            BindingContext = cityWeatherViewModel;
         }
+
     }
 }
