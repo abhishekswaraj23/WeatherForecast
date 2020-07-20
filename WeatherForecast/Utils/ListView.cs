@@ -15,7 +15,6 @@ namespace WeatherForecast.Utils
             this.ItemTapped += this.OnItemTapped;
         }
 
-
         public ICommand ItemClickCommand
         {
             get { return (ICommand)this.GetValue(ItemClickCommandProperty); }

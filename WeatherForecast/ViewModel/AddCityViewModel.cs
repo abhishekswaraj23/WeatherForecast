@@ -133,7 +133,6 @@ namespace WeatherForecast.ViewModel
                     var location = locations?.FirstOrDefault();
                     if (location != null)
                     {
-                        Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                         IsLoading = true;
                         await GetPlaceMarks(location.Latitude, location.Longitude);
                         IsLoading = false;
@@ -179,7 +178,6 @@ namespace WeatherForecast.ViewModel
 
                 if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                     IsLoading = true;
                     await GetPlaceMarks(location.Latitude, location.Longitude);
                     IsLoading = false;
@@ -190,21 +188,9 @@ namespace WeatherForecast.ViewModel
                     Address = "Unable to detect location";
                 }
             }
-            catch (FeatureNotSupportedException fnsEx)
-            {
-                // Handle not supported on device exception
-            }
-            catch (FeatureNotEnabledException fneEx)
-            {
-                // Handle not enabled on device exception
-            }
-            catch (PermissionException pEx)
-            {
-                // Handle permission exception
-            }
             catch (Exception ex)
             {
-                // Unable to get location
+                Address = "Unable to detect location";
             }
             finally
             {

@@ -20,7 +20,6 @@ namespace WeatherForecast.Model
         public string WindSpeed { get; set; }
         public string WeatherDesc { get; set; }
         public string WeatherIcon { get; set; }
-
         public double UVI { get; set; }
         public double? Rain { get; set; }
 
