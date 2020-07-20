@@ -17,7 +17,7 @@
                 <ViewCell>
                     <Frame BackgroundColor="#301479" Margin="2,5,2,0" CornerRadius="20">
                         <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center" BackgroundColor="#301479" HeightRequest="100" Margin="10,0,10,5">
-                            <FlexLayout Direction="Column" WidthRequest="300" JustifyContent="SpaceBetween" Margin="10,5,0,5">
+                            <FlexLayout Direction="Column" WidthRequest="300" JustifyContent="SpaceBetween" Margin="0,5,0,5">
                                 <Label Text="{Binding Date,StringFormat='{0:D}'}" TextColor="#FFCD00" FontSize="25"/>
                                 <Label Text="{Binding DayTemp,StringFormat='{0}°C'}" TextColor="#5BC5F0" FontSize="25"/>
                                 <Label Text="{Binding WeatherDesc}" TextColor="#D95362" FontSize="15"/>
@@ -32,11 +32,11 @@
             <DataTemplate x:Key="futureDayTemplate">
                 <ViewCell>
                     <Frame BackgroundColor="#5129BB" Margin="2,2,2,0" CornerRadius="20">
-                        <FlexLayout BackgroundColor="#5129BB" Direction="Row" AlignItems="Center" HeightRequest="30" JustifyContent="SpaceBetween"  Margin="10,0,10,5">
-                            <Label Text="{Binding Date,StringFormat='{0:ddd},{0:dd-MMM}'}" TextColor="White" FontSize="16" Margin="10,0,0,0"/>
-                            <Label Text="{Binding DayTemp, StringFormat='{0}°C'}" TextColor="White" FontSize="16"/>
-                            <Label Text="{Binding WeatherDesc}" TextColor="White" FontSize="16"/>
-                            <Image Source="{Binding WeatherIcon}"/>
+                        <FlexLayout BackgroundColor="#5129BB" Direction="Row" AlignItems="Center" HeightRequest="30" JustifyContent="SpaceBetween"  Margin="0,0,0,0">
+                            <Label Text="{Binding Date,StringFormat='{0:ddd},{0:dd-MMM}'}" WidthRequest="100" TextColor="PapayaWhip" FontSize="16" Margin="10,0,0,0"/>
+                            <Label Text="{Binding DayTemp, StringFormat='{0}°C'}" WidthRequest="80" TextColor="PapayaWhip" FontSize="16"/>
+                            <Label Text="{Binding WeatherDesc}" TextColor="PapayaWhip" WidthRequest="150" FontSize="16"/>
+                            <Image Source="{Binding WeatherIcon}" HeightRequest="50" WidthRequest="40"/>
                         </FlexLayout>
                     </Frame>
                 </ViewCell>
